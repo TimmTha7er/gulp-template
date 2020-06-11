@@ -1,0 +1,26 @@
+// ----------------------------------------------
+//		vars
+// ----------------------------------------------
+$accent-color: #00aeef;
+$text-color: #333333;
+$accent-gradient: linear-gradient(45deg, #31aae2 0%, #9d35c0 100%);
+
+
+@media only screen and (max-width: 1200px) {
+  :root {
+		--section-padding: 80px;
+		--big-section-padding: 150px;
+  }
+}
+@media only screen and (max-width: 992px) {
+  :root {
+		--section-padding: 60px;
+		--big-section-padding: 125px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  :root {
+		--section-padding: 50px;
+		--big-section-padding: 75px;
+  }
+}
