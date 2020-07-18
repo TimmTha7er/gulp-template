@@ -1,5 +1,5 @@
 // PATHs
-const project_folter = 'dist';
+const build_folder = 'dist';
 const source_folder = 'app';
 
 // imports
@@ -17,7 +17,9 @@ const { src, dest } = require('gulp'),
   babel = require('gulp-babel'),
   imagemin = require('gulp-imagemin'),
   webp = require('gulp-webp'),
-  concat = require('gulp-concat');
+  concat = require('gulp-concat'),
+  ttf2woff2 = require('gulp-ttf2woff2'),
+  ttf2woff = require('gulp-ttf2woff');
 
 // HTML
 const html = () => {
@@ -36,7 +38,7 @@ const html = () => {
 };
 
 const exportHTML = () => {
-  return src(source_folder + '/index.html').pipe(dest(project_folter + '/'));
+  return src(source_folder + '/index.html').pipe(dest(build_folder + '/'));
 };
 
 // CSS
@@ -68,7 +70,7 @@ const css = () => {
 };
 
 const exportCSS = () => {
-  return src(source_folder + '/css/**/*').pipe(dest(project_folter + '/css/'));
+  return src(source_folder + '/css/**/*').pipe(dest(build_folder + '/css/'));
 };
 
 // JS
@@ -91,7 +93,7 @@ const js = () => {
 
 const exportJS = () => {
   return src(source_folder + '/js/scripts.min.js')
-    .pipe(dest(project_folter + '/js/'))
+    .pipe(dest(build_folder + '/js/'))
     .pipe(
       src([
         // add js libs
@@ -105,17 +107,28 @@ const exportJS = () => {
         presets: ['@babel/preset-env'],
       })
     )
-    .pipe(dest(project_folter + '/js/'));
+    .pipe(dest(build_folder + '/js/'));
 };
 
-// fonts
+// FONTS
+// TASK, 'gulp convertFont' to run
+const convertFont = () => {
+  return src([source_folder + '/fonts/**/*.ttf'])
+    .pipe(ttf2woff())
+    .pipe(dest(source_folder + '/fonts/'))
+    .pipe(src([source_folder + '/fonts/**/*.ttf']))
+    .pipe(ttf2woff2())
+    .pipe(dest(source_folder + '/fonts/'));
+};
+exports.convertFont = convertFont;
+
 const exportFont = () => {
   return src(source_folder + '/fonts/**/*').pipe(
-    dest(project_folter + '/fonts/')
+    dest(build_folder + '/fonts/')
   );
 };
 
-// imgs
+// IMG
 const exportImages = () => {
   return src([
     source_folder + 'img/**/*',
@@ -126,7 +139,7 @@ const exportImages = () => {
         quality: 70,
       })
     )
-    .pipe(dest(project_folter + '/img/'))
+    .pipe(dest(build_folder + '/img/'))
     .pipe(src(source_folder + '/img/**/*'))
     .pipe(
       imagemin({
@@ -136,7 +149,7 @@ const exportImages = () => {
         optimizationLevel: 3, // 0 to 7
       })
     )
-    .pipe(dest(project_folter + '/img/'));
+    .pipe(dest(build_folder + '/img/'));
 };
 
 // Sync
@@ -160,7 +173,7 @@ const watchFiles = () => {
 
 // remove dist bofore build
 const clean = () => {
-  return del(['./' + project_folter + '/'], { force: true });
+  return del(['./' + build_folder + '/'], { force: true });
 };
 
 // build project
