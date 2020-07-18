@@ -111,8 +111,8 @@ const exportJS = () => {
 };
 
 // FONTS
-// TASK, 'gulp convertFont' to run
-const convertFont = () => {
+// TASK, 'gulp convertFonts' to run
+const convertFonts = () => {
   return src([source_folder + '/fonts/**/*.ttf'])
     .pipe(ttf2woff())
     .pipe(dest(source_folder + '/fonts/'))
@@ -120,7 +120,7 @@ const convertFont = () => {
     .pipe(ttf2woff2())
     .pipe(dest(source_folder + '/fonts/'));
 };
-exports.convertFont = convertFont;
+exports.convertFonts = convertFonts;
 
 const exportFont = () => {
   return src(source_folder + '/fonts/**/*').pipe(
@@ -128,10 +128,11 @@ const exportFont = () => {
   );
 };
 
-// IMG
-const exportImages = () => {
+// IMAGES
+// TASK, 'gulp convertImages' to run
+const convertImages = () => {
   return src([
-    source_folder + 'img/**/*',
+    source_folder + '/img/**/*',
     '!' + source_folder + '/img/favicon/**/*',
   ])
     .pipe(
@@ -139,8 +140,12 @@ const exportImages = () => {
         quality: 70,
       })
     )
-    .pipe(dest(build_folder + '/img/'))
-    .pipe(src(source_folder + '/img/**/*'))
+    .pipe(dest(source_folder + '/img'));
+};
+exports.convertImages = convertImages;
+
+const exportImages = () => {
+  return src(source_folder + '/img/**/*')
     .pipe(
       imagemin({
         progressive: true,
@@ -149,7 +154,7 @@ const exportImages = () => {
         optimizationLevel: 3, // 0 to 7
       })
     )
-    .pipe(dest(build_folder + '/img/'));
+    .pipe(dest(build_folder + '/img'));
 };
 
 // Sync
