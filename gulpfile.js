@@ -2,45 +2,6 @@
 const project_folter = 'dist';
 const source_folder = 'app';
 
-let path = {
-  src: {
-    html: [
-      source_folder + '/html/*.html',
-      '!' + source_folder + '/html/_*.html',
-    ],
-    css: source_folder + '/scss/main.scss',
-    js: [
-      // add js libs
-      source_folder + '/js/common.js',
-    ],
-    img: source_folder + '/img/**/*',
-    fonts: source_folder + '/fonts/**/*',
-  },
-  export: {
-    html: source_folder + '/index.html',
-    css: source_folder + '/css/**/*',
-    js: source_folder + '/js/scripts.min.js',
-    img: [
-      source_folder + 'img/**/*',
-      '!' + source_folder + '/img/favicon/**/*',
-    ],
-    fonts: source_folder + '/fonts/**/*',
-  },
-  build: {
-    html: project_folter + '/',
-    css: project_folter + '/css/',
-    js: project_folter + '/js/',
-    img: project_folter + '/img/',
-    fonts: project_folter + '/fonts/',
-  },
-  watch: {
-    html: source_folder + '/html/**/*.html',
-    css: source_folder + '/scss/**/*.scss',
-    js: source_folder + '/js/common.js',
-  },
-  clean: './' + project_folter + '/',
-};
-
 // imports
 const { src, dest } = require('gulp'),
   gulp = require('gulp'),
@@ -60,7 +21,10 @@ const { src, dest } = require('gulp'),
 
 // HTML
 const html = () => {
-  return src(path.src.html)
+  return src([
+    source_folder + '/html/*.html',
+    '!' + source_folder + '/html/_*.html',
+  ])
     .pipe(fileinclude())
     .pipe(
       rename({
@@ -72,13 +36,12 @@ const html = () => {
 };
 
 const exportHTML = () => {
-  return src(path.export.html).pipe(dest(path.build.html));
+  return src(source_folder + '/index.html').pipe(dest(project_folter + '/'));
 };
-
 
 // CSS
 const css = () => {
-  return src(path.src.css)
+  return src(source_folder + '/scss/main.scss')
     .pipe(
       scss({
         outputStyle: 'expanded',
@@ -105,12 +68,16 @@ const css = () => {
 };
 
 const exportCSS = () => {
-  return src(path.export.css).pipe(dest(path.build.css));
+  return src(source_folder + '/css/**/*').pipe(dest(project_folter + '/css/'));
 };
 
 // JS
 const js = () => {
-  return src(path.src.js)
+  return src([
+    // add js libs
+    // ...
+    source_folder + '/js/common.js', // Always at the end
+  ])
     .pipe(concat('scripts.min.js'))
     .pipe(
       babel({
@@ -123,33 +90,44 @@ const js = () => {
 };
 
 const exportJS = () => {
-  return src(path.export.js)
-    .pipe(dest(path.build.js))
-    .pipe(src(path.src.js))
+  return src(source_folder + '/js/scripts.min.js')
+    .pipe(dest(project_folter + '/js/'))
+    .pipe(
+      src([
+        // add js libs
+        // ...
+        source_folder + '/js/common.js', // Always at the end
+      ])
+    )
     .pipe(concat('scripts.js'))
     .pipe(
       babel({
         presets: ['@babel/preset-env'],
       })
     )
-    .pipe(dest(path.build.js));
+    .pipe(dest(project_folter + '/js/'));
 };
 
 // fonts
 const exportFont = () => {
-  return src(path.export.fonts).pipe(dest(path.build.fonts));
+  return src(source_folder + '/fonts/**/*').pipe(
+    dest(project_folter + '/fonts/')
+  );
 };
 
 // imgs
 const exportImages = () => {
-  return src(path.export.img)
+  return src([
+    source_folder + 'img/**/*',
+    '!' + source_folder + '/img/favicon/**/*',
+  ])
     .pipe(
       webp({
         quality: 70,
       })
     )
-    .pipe(dest(path.build.img))
-    .pipe(src(path.src.img))
+    .pipe(dest(project_folter + '/img/'))
+    .pipe(src(source_folder + '/img/**/*'))
     .pipe(
       imagemin({
         progressive: true,
@@ -158,7 +136,7 @@ const exportImages = () => {
         optimizationLevel: 3, // 0 to 7
       })
     )
-    .pipe(dest(path.build.img));
+    .pipe(dest(project_folter + '/img/'));
 };
 
 // Sync
@@ -175,14 +153,14 @@ const browserSync = () => {
 };
 
 const watchFiles = () => {
-  gulp.watch([path.watch.html], html);
-  gulp.watch([path.watch.css], css);
-  gulp.watch([path.watch.js], js);
+  gulp.watch([source_folder + '/html/**/*.html'], html);
+  gulp.watch([source_folder + '/scss/**/*.scss'], css);
+  gulp.watch([source_folder + '/js/common.js'], js);
 };
 
 // remove dist bofore build
 const clean = () => {
-  return del([path.clean], { force: true });
+  return del(['./' + project_folter + '/'], { force: true });
 };
 
 // build project
