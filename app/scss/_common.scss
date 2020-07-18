@@ -1,16 +1,4 @@
 // ----------------------------------------------
-//		box-sizing
-// ----------------------------------------------
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-// ----------------------------------------------
 //		common
 // ----------------------------------------------
 body {
@@ -18,16 +6,14 @@ body {
   line-height: 1.8;
   font-family: 'Open Sans', sans-serif;
   color: $text-color;
-  overflow-x: hidden;
-
-  // — убирает синее подсвечивание при клике на девайсах.
-  -webkit-tap-highlight-color: transparent;
 }
 
 .hidden {
   display: none;
 }
 
+// (:hover, :focus, :active).
+// https://codepen.io/yurch-html/pen/qyaOZz
 .link {
   text-decoration: none;
   color: #fff;
@@ -37,12 +23,17 @@ body {
   }
   &:visited {
   }
-  &:hover {    
+  &:hover {
     color: $accent-color;
   }
   &:active {
     color: $accent-color;
   }
+}
+
+::selection {
+  color: #fff;
+  background-color: #004fe4;
 }
 
 .container {
