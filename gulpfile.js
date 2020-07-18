@@ -92,22 +92,9 @@ const js = () => {
 };
 
 const exportJS = () => {
-  return src(source_folder + '/js/scripts.min.js')
-    .pipe(dest(build_folder + '/js/'))
-    .pipe(
-      src([
-        // add js libs
-        // ...
-        source_folder + '/js/common.js', // Always at the end
-      ])
-    )
-    .pipe(concat('scripts.js'))
-    .pipe(
-      babel({
-        presets: ['@babel/preset-env'],
-      })
-    )
-    .pipe(dest(build_folder + '/js/'));
+  return src(source_folder + '/js/scripts.min.js').pipe(
+    dest(build_folder + '/js/')
+  );
 };
 
 // FONTS

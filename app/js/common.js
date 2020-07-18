@@ -16,5 +16,7 @@
       return document.createElement(type);
     }
 
+    console.log('h1llo from gulp')
+
   });
 })();
