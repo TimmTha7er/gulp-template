@@ -190,7 +190,6 @@ sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
-  vertical-align: baseline;
 }
 
 sub {
@@ -209,14 +208,12 @@ sup {
  */
 
  /**
- * 1. Remove border when inside `a` element in IE 6/7/8/9 and Firefox 3.
- * 2. Improve image quality when scaled in IE 7.
+ * 2. Remove border when inside `a` element in IE 6/7/8/9 and Firefox 3.
  */
 
 img {
   border-style: none; /* 1 */
-  border: 0; /* 2 */
-  -ms-interpolation-mode: bicubic; /* 3 */
+  -ms-interpolation-mode: bicubic; /* 2 */
 }
 
 /* Forms
@@ -305,7 +302,6 @@ legend {
   color: inherit; /* 2 */
   display: table; /* 1 */
   max-width: 100%; /* 1 */
-  padding: 0; /* 3 */
   white-space: normal; /* 1 */
 }
 
