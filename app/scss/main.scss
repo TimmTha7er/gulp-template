@@ -1,8 +1,19 @@
-@import 'fonts';
-@import '../libs/normalize/normalize';
+// https://sass-guidelin.es/#the-7-1-pattern
 
-@import 'vars';
-@import 'common';
-@import 'header';
-@import 'footer';
+// abstracts
+@import './abstracts/vars';
 
+// base
+@import './base/fonts';
+@import './base/normalize';
+@import './base/common';
+
+// components
+
+// layout
+@import './layout/header';
+@import './layout/footer';
+
+// pages
+// themes
+// vendors
