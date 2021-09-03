@@ -2,12 +2,13 @@
 //		common
 // ----------------------------------------------
 body {
-  font-size: 15px;
-  line-height: 1.8;
-  font-family: 'Open Sans', sans-serif;
   min-width: 320px;
   overflow-x: hidden;
+
   color: $text-color;
+  font-size: 15px;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.8;
 }
 
 .hidden {
@@ -17,24 +18,29 @@ body {
 // (:hover, :focus, :active).
 // https://codepen.io/yurch-html/pen/qyaOZz
 .link {
+  color: #ffffff;
   text-decoration: none;
-  color: #fff;
+
   transition: color 0.25s ease;
 
   &:link {
   }
+
   &:visited {
   }
+
   &:hover {
     color: $accent-color;
   }
+
   &:active {
     color: $accent-color;
   }
 }
 
 ::selection {
-  color: #fff;
+  color: #ffffff;
+
   background-color: #004fe4;
 }
 
