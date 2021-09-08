@@ -1,0 +1,8 @@
+@mixin text-crop($line-clamp) {
+  display: -webkit-box;
+  box-sizing: content-box;
+
+  overflow: hidden;
+  -webkit-line-clamp: $line-clamp;
+  -webkit-box-orient: vertical;
+}
