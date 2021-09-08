@@ -1,6 +1,7 @@
 // PATHs
 const build_folder = 'dist';
 const source_folder = 'app';
+const public_folder = '_public';
 
 // imports
 const { src, dest } = require('gulp'),
@@ -33,12 +34,12 @@ const html = () => {
         basename: 'index',
       })
     )
-    .pipe(dest('./app/'))
+    .pipe(dest(`./app/${public_folder}/`))
     .pipe(browsersync.stream());
 };
 
 const exportHTML = () => {
-  return src(source_folder + '/index.html').pipe(dest(build_folder + '/'));
+  return src(source_folder + `/${public_folder}/index.html`).pipe(dest(build_folder + '/'));
 };
 
 // CSS
@@ -57,7 +58,7 @@ const css = () => {
       })
     )
     .pipe(groupmedia())
-    .pipe(dest('./app/css/'))
+    .pipe(dest(`./app/${public_folder}/css/`))
     .pipe(cleanCSS())
     .pipe(
       rename({
@@ -65,12 +66,12 @@ const css = () => {
         extname: '.min.css',
       })
     )
-    .pipe(dest('./app/css/'))
+    .pipe(dest(`./app/${public_folder}/css/`))
     .pipe(browsersync.stream());
 };
 
 const exportCSS = () => {
-  return src(source_folder + '/css/**/*').pipe(dest(build_folder + '/css/'));
+  return src(source_folder + `/${public_folder}/css/**/*`).pipe(dest(build_folder + '/css/'));
 };
 
 // JS
@@ -87,13 +88,13 @@ const js = () => {
       })
     )
     .pipe(uglify())
-    .pipe(dest('./app/js/'))
+    .pipe(dest(`./app/${public_folder}/js/`))
     .pipe(browsersync.stream());
 };
 
 const exportJS = () => {
-  return src(source_folder + '/js/scripts.min.js').pipe(
-    dest(build_folder + '/js/')
+  return src(source_folder + `/${public_folder}/js/scripts.min.js`).pipe(
+    dest(build_folder + `/${public_folder}/js/`)
   );
 };
 
@@ -148,7 +149,7 @@ const exportImages = () => {
 const browserSync = () => {
   browsersync.init({
     server: {
-      baseDir: './' + source_folder + '/',
+      baseDir: './' + source_folder + `/${public_folder}/`,
     },
     port: 3000,
     notify: false,
