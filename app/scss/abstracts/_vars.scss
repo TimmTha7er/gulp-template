@@ -1,5 +1,122 @@
-// ----------------------------------------------
-//		vars
-// ----------------------------------------------
-$accent-color: #00aeef;
-$text-color: #333333;
+/* stylelint-disable */
+
+// Colors
+//
+// Black
+$black-900:       #222222;
+$black-900-a40:   rgba($black-900, 0.4);
+$black-900-a20:   rgba($black-900, 0.2);
+$black-300:       rgba(#999999, 0.1);
+
+// White
+$white:           #ffffff;
+$white-a60:       rgba($white, 0.6);
+$white-a10:       rgba($white, 0.1);
+
+// Blue
+$blue-950-a40:    rgba(#000040, 0.4);
+$blue-100:        #f5f5f7;
+
+
+// Typography
+//
+$font-family-sans-serif: (
+  'formular',
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  roboto,
+  'Helvetica Neue',
+  arial,
+  'Noto Sans',
+  'Liberation Sans',
+  sans-serif,
+  'Apple Color Emoji',
+  'Segoe UI Emoji',
+  'Segoe UI Symbol',
+  'Noto Color Emoji'
+);
+
+$font-size-system: (
+  'xs':           1.375rem,	// 11px
+  'sm':           1.625rem,	// 13px
+  'md':           1.875rem,	// 15px
+  'lg':           2.125rem,	// 19px
+  'xl':           2.375rem,	// 25px
+	'xxl':          3rem,			// 32px
+);
+
+$font-size-base:            map_get($font-size-system, "md"); // 15px
+$font-size-sm:              map_get($font-size-system, "sm"); // 13px
+$font-size-lg:              map_get($font-size-system, "lg"); // 19px
+
+$font-weight-system: (
+  'normal':           400,
+  'medium':           500,
+  'bold':           	700,
+  'bolder':           900,
+);
+
+$line-height-system: (
+  'xs':           1,
+  'sm':           1.1,
+  'md':           1.2,
+  'lg':           1.3,
+  'xl':           1.4,
+  'xxl':          1.5,
+);
+
+$letter-spacing-base: -0.03em;
+$line-height-base: map_get($line-height-system, "lg");
+
+$h1-font-size:              map_get($font-size-system, "xxl");
+$h2-font-size:              map_get($font-size-system, "xl");
+$h3-font-size:              map_get($font-size-system, "lg");
+$h4-font-size:              map_get($font-size-system, "md");
+$h5-font-size:              map_get($font-size-system, "sm");
+$h6-font-size:              map_get($font-size-system, "xs");
+
+$text-muted:                $black-900-a40;
+
+
+// Options
+//
+$grid-breakpoints: (
+  xs: 0,
+  sm: 400px,
+  md: 520px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+$spacer:                    1rem;
+
+// Body
+//
+$body-bg:                   $blue-100;
+$body-color:                $black-900;
+
+// Links
+//
+$link-decoration:           none;
+$link-hover-color:          $black-900-a40;
+$link-active-color:         $black-900-a40;
+$link-transition: 					color 150ms ease-in-out;
+
+// Border
+//
+$border-color:              $black-900-a20;
+
+$border-radius:             0.25rem;
+$border-radius-sm:          0.2rem;
+$border-radius-lg:          0.5rem;
+
+
+// Icons
+//
+$icon-sizes:                                 "12", "24", "32";
+$icon-bg-default:                            $black-900;
+
+
+/* stylelint-enable */

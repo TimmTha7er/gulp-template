@@ -1,14 +1,19 @@
-// ----------------------------------------------
-//		common
-// ----------------------------------------------
 body {
   min-width: 320px;
   overflow-x: hidden;
 
-  color: $text-color;
-  font-size: 15px;
-  font-family: 'Open Sans', sans-serif;
-  line-height: 1.8;
+  color: $body-color;
+  font-size: $font-size-base;
+  font-family: 'Open Sans', $font-family-sans-serif;
+  line-height: $line-height-base;
+  letter-spacing: $letter-spacing-base;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // Change the default tap highlight in iOS
+  -webkit-tap-highlight-color: $black-900-a40;
 }
 
 .hidden {
@@ -18,10 +23,10 @@ body {
 // (:hover, :focus, :active).
 // https://codepen.io/yurch-html/pen/qyaOZz
 .link {
-  color: #ffffff;
-  text-decoration: none;
+  color: $white;
+  text-decoration: $link-decoration;
 
-  transition: color 0.25s ease;
+  transition: $link-transition;
 
   &:link {
   }
@@ -30,11 +35,11 @@ body {
   }
 
   &:hover {
-    color: $accent-color;
+    color: $link-hover-color;
   }
 
   &:active {
-    color: $accent-color;
+    color: $link-active-color;
   }
 }
 
@@ -46,6 +51,9 @@ body {
 
 .container {
   max-width: 1170px;
+
+  // mobile viewport bug fix
+  height: -webkit-fill-available;
   margin: 0 auto;
 
   @media only screen and (max-width: 1200px) {

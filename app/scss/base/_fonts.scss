@@ -1,6 +1,6 @@
 // ----------- Open Sans -----------
 @font-face {
-  font-weight: $font-weight-normal;
+  font-weight: map_get($font-weight-system, 'normal');
   font-family: 'Open Sans';
   font-style: normal;
   src: local('Open Sans'), local('OpenSans'),
@@ -11,7 +11,7 @@
 }
 
 @font-face {
-  font-weight: $font-weight-normal;
+  font-weight: map_get($font-weight-system, 'normal');
   font-family: 'Open Sans';
   font-style: italic;
   src: local('Open Sans Italic'), local('OpenSans-Italic'),
@@ -22,7 +22,7 @@
 }
 
 @font-face {
-  font-weight: $font-weight-bold;
+  font-weight: map_get($font-weight-system, 'bold');
   font-family: 'Open Sans';
   font-style: normal;
   src: local('Open Sans Bold'), local('OpenSans-Bold'),
