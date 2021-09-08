@@ -75,12 +75,14 @@ q:before, q:after {
  *    `em` units.
  * 2. Prevent iOS text size adjust after orientation change, without disabling
  *    user zoom.
+ * 3. Fix mobile viewport bug.
  */
 
  html {
   font-size: 100%; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
   -ms-text-size-adjust: 100%; /* 2 */
+  height: -webkit-fill-available;
 }
 
 
