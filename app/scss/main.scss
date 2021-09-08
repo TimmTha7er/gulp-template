@@ -1,19 +1,26 @@
 // https://sass-guidelin.es/#the-7-1-pattern
 
+// vendors
+@import './vendors/normalize';
+
 // abstracts
 @import './abstracts/vars';
+@import './abstracts/mixins';
+
+// themes
+@import './themes/light.scss';
+// @import './themes/dark.scss';
 
 // base
 @import './base/fonts';
-@import './base/normalize';
 @import './base/common';
 
-// components
+// pages
+@import './pages/home.scss';
 
 // layout
 @import './layout/header';
 @import './layout/footer';
 
-// pages
-// themes
-// vendors
+// components
+@import './components/nav.scss';
