@@ -3,7 +3,7 @@ const dist_folder = 'production';
 const source_folder = 'app';
 const build_folder = 'gulp-build';
 
-// imports
+// Imports
 const { src, dest } = require('gulp'),
   gulp = require('gulp'),
   browsersync = require('browser-sync').create(),
@@ -164,12 +164,12 @@ const watchFiles = () => {
   gulp.watch([source_folder + '/src/js/common.js'], js);
 };
 
-// remove dist bofore build
+// Remove production folder before build
 const clean = () => {
   return del(['./' + dist_folder + '/'], { force: true });
 };
 
-// build project
+// Build project
 const build = gulp.series(
   clean,
   html,
