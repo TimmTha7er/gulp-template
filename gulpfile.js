@@ -1,7 +1,7 @@
 // PATHs
-const build_folder = 'dist';
+const dist_folder = 'production';
 const source_folder = 'app';
-const public_folder = '_public';
+const build_folder = 'gulp-build';
 
 // imports
 const { src, dest } = require('gulp'),
@@ -25,8 +25,8 @@ const { src, dest } = require('gulp'),
 // HTML
 const html = () => {
   return src([
-    source_folder + '/html/*.html',
-    '!' + source_folder + '/html/_*.html',
+    source_folder + '/src/html/*.html',
+    '!' + source_folder + '/src/html/_*.html',
   ])
     .pipe(fileinclude())
     .pipe(
@@ -34,17 +34,17 @@ const html = () => {
         basename: 'index',
       })
     )
-    .pipe(dest(`./app/${public_folder}/`))
+    .pipe(dest(`./app/${build_folder}/`))
     .pipe(browsersync.stream());
 };
 
 const exportHTML = () => {
-  return src(source_folder + `/${public_folder}/index.html`).pipe(dest(build_folder + '/'));
+  return src(source_folder + `/${build_folder}/index.html`).pipe(dest(dist_folder + '/'));
 };
 
 // CSS
 const css = () => {
-  return src(source_folder + '/scss/main.scss')
+  return src(source_folder + '/src/scss/main.scss')
     .pipe(
       scss({
         outputStyle: 'expanded',
@@ -58,7 +58,7 @@ const css = () => {
       })
     )
     .pipe(groupmedia())
-    .pipe(dest(`./app/${public_folder}/css/`))
+    .pipe(dest(`./app/${build_folder}/css/`))
     .pipe(cleanCSS())
     .pipe(
       rename({
@@ -66,12 +66,12 @@ const css = () => {
         extname: '.min.css',
       })
     )
-    .pipe(dest(`./app/${public_folder}/css/`))
+    .pipe(dest(`./app/${build_folder}/css/`))
     .pipe(browsersync.stream());
 };
 
 const exportCSS = () => {
-  return src(source_folder + `/${public_folder}/css/**/*`).pipe(dest(build_folder + '/css/'));
+  return src(source_folder + `/${build_folder}/css/**/*`).pipe(dest(dist_folder + '/css/'));
 };
 
 // JS
@@ -79,7 +79,7 @@ const js = () => {
   return src([
     // add js libs
     // ...
-    source_folder + '/js/common.js', // Always at the end
+    source_folder + '/src/js/common.js', // Always at the end
   ])
     .pipe(concat('scripts.min.js'))
     .pipe(
@@ -88,31 +88,31 @@ const js = () => {
       })
     )
     .pipe(uglify())
-    .pipe(dest(`./app/${public_folder}/js/`))
+    .pipe(dest(`./app/${build_folder}/js/`))
     .pipe(browsersync.stream());
 };
 
 const exportJS = () => {
-  return src(source_folder + `/${public_folder}/js/scripts.min.js`).pipe(
-    dest(build_folder + `/${public_folder}/js/`)
+  return src(source_folder + `/${build_folder}/js/scripts.min.js`).pipe(
+    dest(dist_folder + `/${build_folder}/js/`)
   );
 };
 
 // FONTS
 // TASK, 'gulp convertFonts' to run
 const convertFonts = () => {
-  return src([source_folder + '/fonts/**/*.ttf'])
+  return src([source_folder + '/src/fonts/**/*.ttf'])
     .pipe(ttf2woff())
-    .pipe(dest(source_folder + '/fonts/'))
-    .pipe(src([source_folder + '/fonts/**/*.ttf']))
+    .pipe(dest(source_folder + '/src/fonts/'))
+    .pipe(src([source_folder + '/src/fonts/**/*.ttf']))
     .pipe(ttf2woff2())
-    .pipe(dest(source_folder + '/fonts/'));
+    .pipe(dest(source_folder + '/src/fonts/'));
 };
 exports.convertFonts = convertFonts;
 
 const exportFont = () => {
-  return src(source_folder + '/fonts/**/*').pipe(
-    dest(build_folder + '/fonts/')
+  return src(source_folder + '/src/fonts/**/*').pipe(
+    dest(dist_folder + '/fonts/')
   );
 };
 
@@ -120,20 +120,20 @@ const exportFont = () => {
 // TASK, 'gulp convertImages' to run
 const convertImages = () => {
   return src([
-    source_folder + '/img/**/*',
-    '!' + source_folder + '/img/favicon/**/*',
+    source_folder + '/src/img/**/*',
+    '!' + source_folder + '/src/img/favicon/**/*',
   ])
     .pipe(
       webp({
         quality: 70,
       })
     )
-    .pipe(dest(source_folder + '/img'));
+    .pipe(dest(source_folder + '/src/img'));
 };
 exports.convertImages = convertImages;
 
 const exportImages = () => {
-  return src(source_folder + '/img/**/*')
+  return src(source_folder + '/src/img/**/*')
     .pipe(
       imagemin({
         progressive: true,
@@ -142,14 +142,14 @@ const exportImages = () => {
         optimizationLevel: 3, // 0 to 7
       })
     )
-    .pipe(dest(build_folder + '/img'));
+    .pipe(dest(dist_folder + '/img'));
 };
 
 // Sync
 const browserSync = () => {
   browsersync.init({
     server: {
-      baseDir: './' + source_folder + `/${public_folder}/`,
+      baseDir: './' + source_folder + `/${build_folder}/`,
     },
     port: 3000,
     notify: false,
@@ -159,14 +159,14 @@ const browserSync = () => {
 };
 
 const watchFiles = () => {
-  gulp.watch([source_folder + '/html/**/*.html'], html);
-  gulp.watch([source_folder + '/scss/**/*.scss'], css);
-  gulp.watch([source_folder + '/js/common.js'], js);
+  gulp.watch([source_folder + '/src/html/**/*.html'], html);
+  gulp.watch([source_folder + '/src/scss/**/*.scss'], css);
+  gulp.watch([source_folder + '/src/js/common.js'], js);
 };
 
 // remove dist bofore build
 const clean = () => {
-  return del(['./' + build_folder + '/'], { force: true });
+  return del(['./' + dist_folder + '/'], { force: true });
 };
 
 // build project
