@@ -3,10 +3,8 @@
   font-weight: map_get($font-weight-system, 'normal');
   font-family: 'Open Sans';
   font-style: normal;
-  src: local('Open Sans'), local('OpenSans'),
-    url('../fonts/OpenSans/opensans.woff2') format('woff2'),
-    url('../fonts/OpenSans/opensans.woff') format('woff'),
-    url('../fonts/OpenSans/opensans.ttf') format('truetype');
+  src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans/opensans.woff2') format('woff2'),
+    url('../fonts/OpenSans/opensans.woff') format('woff'), url('../fonts/OpenSans/opensans.ttf') format('truetype');
   font-display: swap;
 }
 
@@ -25,8 +23,7 @@
   font-weight: map_get($font-weight-system, 'bold');
   font-family: 'Open Sans';
   font-style: normal;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'),
-    url('../fonts/OpenSans/opensansbold.woff2') format('woff2'),
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url('../fonts/OpenSans/opensansbold.woff2') format('woff2'),
     url('../fonts/OpenSans/opensansbold.woff') format('woff'),
     url('../fonts/OpenSans/opensansbold.ttf') format('truetype');
   font-display: swap;
